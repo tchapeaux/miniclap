@@ -11,9 +11,9 @@ export default defineConfig({
       custom: {
         families: [
           {
-            name: "Perpetua",
-            local: "Perpetua",
-            src: "../assets/Perpetua.otf",
+            name: "Chivo",
+            local: "Chivo",
+            src: "../assets/Chivo-Regular.otf",
           },
         ],
         display: "auto",
