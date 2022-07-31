@@ -8,14 +8,15 @@ import EventView from "./Views/EventView";
 import "./App.css";
 
 export default function App() {
+  const [hasClientConfig, setHasClientConfig] = useState(false);
   const [eventCode, setEventCode] = useState(null);
-  const [wooclapConfig, setWooclapConfig] = useState(null);
 
   useEffect(() => {
     // Load Wooclap config (to get ably credentials)
     async function loadConfig() {
       const config = await getConfig();
-      setWooclapConfig(config);
+      window.__wooclap.clientConfig = config;
+      setHasClientConfig(true);
     }
     loadConfig();
 
@@ -29,6 +30,10 @@ export default function App() {
 
   function onSubmit(eventCode) {
     setEventCode(eventCode);
+  }
+
+  if (!wooclapConfig) {
+    return <div className="App">Loading...</div>;
   }
 
   return (
