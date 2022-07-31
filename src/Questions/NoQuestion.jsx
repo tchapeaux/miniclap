@@ -1,3 +1,5 @@
+import { Wrapper } from "./questions.styles";
+
 export default function NoQuestion() {
-  return "Raise your head";
+  return <Wrapper>{"Raise your head (no questions yet)"}</Wrapper>;
 }

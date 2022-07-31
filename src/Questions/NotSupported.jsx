@@ -1,3 +1,5 @@
+import { Wrapper } from "./questions.styles";
+
 export default function NotSupported() {
-  return "Not Supported (yet)";
+  return <Wrapper>{"Not Supported (yet)"}</Wrapper>;
 }
