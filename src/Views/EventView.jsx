@@ -12,12 +12,18 @@ export default function Event({ eventCode }) {
     load();
   }, []);
 
+  if (event === null) {
+    return <p>Loading...</p>;
+  }
+
+  if (event === false) {
+    return <p>Could not load event</p>;
+  }
+
   return (
     <div>
       <p>{`You are viewing Event ${eventCode}`}</p>
-      {event === null ? <p>Loading...</p> : null}
-      {event === false ? <p>Could not load event</p> : null}
-      {!!event ? <p>You are now connected</p> : null}
+      <p>You are now connected</p>
     </div>
   );
 }
