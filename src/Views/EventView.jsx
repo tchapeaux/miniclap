@@ -1,12 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import SocketController from "../realtime";
 import { getEvent } from "../api";
 
 export default function Event({ eventCode }) {
   const [event, setEvent] = useState(null);
+  const [ablyMessages, setAblyMessages] = useState([]);
+
+  const rt = useRef(new SocketController());
 
   useEffect(() => {
     async function load() {
-      setEvent(await getEvent(eventCode));
+      const eventData = await getEvent(eventCode);
+      setEvent(eventData);
+
+      rt.current.subscribeToEvent(eventData._id, (name, payload) =>
+        setAblyMessages([...ablyMessages, { name, payload }])
+      );
     }
 
     load();
