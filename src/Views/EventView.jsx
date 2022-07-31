@@ -34,16 +34,17 @@ export default function Event({ eventCode }) {
       console.log("Connection successful")
     );
 
+    const cipherOptions = {
+      key: formatKey(
+        event._id,
+        window.__wooclap.clientConfig.ablyEncryptionKey
+      ),
+      algorithm: clientConfig.ablyEncryptionAlgorithm,
+      keyLength: clientConfig.ablyEncryptionKeyLength,
+      mode: clientConfig.ablyEncryptionMode,
+    };
     const eventChannel = rtClient.channels.get(event._id, {
-      cipher: {
-        key: formatKey(
-          event._id,
-          window.__wooclap.clientConfig.ablyEncryptionKey
-        ),
-        algorithm: clientConfig.encryptionAlgorithm,
-        keyLength: clientConfig.encryptionKeyLength,
-        mode: clientConfig.encryptionMode,
-      },
+      cipher: cipherOptions,
     });
     eventChannel.subscribe((msg) => {
       console.log("Rcvd msg", msg);
