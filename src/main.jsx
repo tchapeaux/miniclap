@@ -1,5 +1,4 @@
 import "./index.css";
-import "virtual:fonts.css";
 
 import App from "./App";
 import React from "react";
