@@ -18,7 +18,7 @@ export default function Event({ eventCode }) {
   }, []);
 
   useEffect(() => {
-    if (event) {
+    if (!event) {
       return;
     }
 
