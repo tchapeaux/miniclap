@@ -12,7 +12,7 @@ export async function getConfig() {
   const res = await fetch(url);
 
   if (res.status >= 400) {
-    alert("Could not load config! Please refresh");
+    alert(`Could not load config from ${baseUrl}`);
   }
 
   return await res.json();
