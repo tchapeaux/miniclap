@@ -1,10 +1,12 @@
-.App {
+import styled from "styled-components";
+
+export const AppStyle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+`;
 
-header {
+export const Header = styled.header`
   max-width: 600px;
   display: flex;
   flex-direction: column;
@@ -15,25 +17,19 @@ header {
 
   margin-top: 8px;
   margin-bottom: 15px;
-}
 
-header h1 {
-  margin-top: 0;
-  margin-bottom: 0;
-}
+  h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+`;
 
-h2 {
-  font-weight: 400;
-  font-size: 1.3rem;
-  text-align: center;
-}
-
-footer {
+export const Footer = styled.footer`
   font-size: 0.7em;
   margin-top: 25px;
-}
+`;
 
-button {
+export const Button = styled.button`
   cursor: pointer;
 
   background: none;
@@ -44,8 +40,8 @@ button {
 
   font-size: 1.3em;
   text-decoration: underline;
-}
 
-button:hover {
-  color: crimson;
-}
+  &:hover {
+    color: crimson;
+  }
+`;

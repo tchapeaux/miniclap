@@ -1,3 +1,4 @@
+import { Button } from "../App.styles";
 import { useState } from "react";
 
 export default function EventCodeForm({ onSubmit }) {
@@ -6,16 +7,12 @@ export default function EventCodeForm({ onSubmit }) {
   return (
     <>
       <h2>Enter code</h2>
-      <div>
-        <input
-          type="text"
-          onChange={({ target: { value } }) => setCode(value)}
-          value={code}
-        />
-      </div>
-      <div>
-        <button onClick={() => onSubmit(code)}>GO</button>
-      </div>
+      <input
+        type="text"
+        onChange={({ target: { value } }) => setCode(value)}
+        value={code}
+      />
+      <Button onClick={() => onSubmit(code)}>GO</Button>
     </>
   );
 }

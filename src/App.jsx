@@ -1,10 +1,9 @@
-import "./App.css";
-
+import { AppStyle, Footer, Header } from "./App.styles";
 import { useEffect, useState } from "react";
 
 import EventCodeForm from "./Views/EventCodeForm";
 import EventView from "./Views/EventView";
-import { getConfig } from "./api";
+import { getConfig } from "./utils/api";
 
 export default function App() {
   const [hasClientConfig, setHasClientConfig] = useState(false);
@@ -32,12 +31,12 @@ export default function App() {
   }
 
   if (!hasClientConfig) {
-    return <div className="App">Loading...</div>;
+    return <AppStyle>Loading...</AppStyle>;
   }
 
   return (
-    <div className="App">
-      <header>MiniClap</header>
+    <AppStyle>
+      <Header>MiniClap</Header>
 
       <main>
         {eventCode ? (
@@ -47,9 +46,9 @@ export default function App() {
         )}
       </main>
 
-      <footer>
+      <Footer>
         <p>Miniclap is an experiment by Tchap</p>
-      </footer>
-    </div>
+      </Footer>
+    </AppStyle>
   );
 }

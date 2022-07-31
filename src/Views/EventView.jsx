@@ -1,7 +1,9 @@
+import * as Questions from "../Questions/index";
+
 import { useEffect, useReducer } from "react";
 
-import SocketController from "../realtime";
-import { getEvent } from "../api";
+import SocketController from "../utils/realtime";
+import { getEvent } from "../utils/api";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -38,7 +40,7 @@ export default function EventView({ eventCode }) {
 
   // Subscribe to updates
   useEffect(() => {
-    if (!store.isLoaded) {
+    if (!store.isLoaded || !store.event) {
       return;
     }
 
@@ -60,25 +62,37 @@ export default function EventView({ eventCode }) {
   }, [store.isLoaded]);
 
   if (store.event === null) {
-    return <p>Loading...</p>;
+    return <p>⌛ Loading...</p>;
   }
 
   if (store.event === false) {
-    return <p>Could not load event</p>;
+    return (
+      <>
+        <p>❌ Could not load event</p>
+        <a href="./">Go back</a>
+      </>
+    );
   }
+
+  const selectedQuestion = store.event.questions.find(
+    (q) => q._id === store.event.selectedQuestion
+  );
+
+  const SelectedQuestionComponent =
+    Questions[selectedQuestion.__t] || Questions.NotSupported;
 
   return (
     <div>
-      <p>{`You are viewing Event ${eventCode}`}</p>
-      <p>You are now connected</p>
-      <ul>
-        {store.event.questions.map((q, idx) => (
-          <li key={idx}>
-            {store.event.selectedQuestion === q._id ? "(x)" : ""}
-            {q.title}
-          </li>
-        ))}
-      </ul>
+      <h2>
+        {"✅ You are connected to: "}
+        <code>{eventCode}</code>
+      </h2>
+
+      {selectedQuestion ? (
+        <SelectedQuestionComponent question={selectedQuestion} />
+      ) : (
+        <Questions.NoQuestion />
+      )}
     </div>
   );
 }
