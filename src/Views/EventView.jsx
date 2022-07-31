@@ -1,62 +1,69 @@
-import { useEffect, useState } from "react";
-import { Realtime } from "ably";
+import { useEffect, useReducer } from "react";
 
-import { formatKey } from "../ably-helpers";
+import SocketController from "../realtime";
 import { getEvent } from "../api";
 
-export default function Event({ eventCode }) {
-  const [event, setEvent] = useState(null);
-  const [ablyMessages, setAblyMessages] = useState([]);
+function reducer(state, action) {
+  switch (action.type) {
+    case "load-event":
+      return {
+        isLoaded: true,
+        event: action.payload,
+      };
+    case "patch-event":
+      return {
+        ...state,
+        event: {
+          ...state.event,
+          ...action.payload,
+        },
+      };
+    default:
+      throw new Error(`Unknown action type ${action.type}`);
+  }
+}
 
+export default function EventView({ eventCode }) {
+  const [store, dispatch] = useReducer(reducer, {
+    event: null,
+    isLoaded: false,
+  });
+
+  // Load event
   useEffect(() => {
-    async function load() {
-      const eventData = await getEvent(eventCode);
-      setEvent(eventData);
-    }
-
-    load();
+    getEvent(eventCode).then((eventData) =>
+      dispatch({ type: "load-event", payload: eventData })
+    );
   }, []);
 
+  // Subscribe to updates
   useEffect(() => {
-    if (!event) {
+    if (!store.isLoaded) {
       return;
     }
 
-    const { clientConfig } = window.__wooclap;
+    const rtClient = new SocketController();
 
-    const rtClient = new Realtime({
-      key: clientConfig.ablyKey,
-      tls: true,
-      transports: ["web_socket"],
-    });
+    rtClient.subscribeToEvent(store.event._id, (name, payload) => {
+      if (
+        name.startsWith("socket:set:Event:") &&
+        name.endsWith(store.event._id)
+      ) {
+        return dispatch({ type: "patch-event", payload });
+      }
 
-    rtClient.connection.on("connected", () =>
-      console.log("Connection successful")
-    );
-
-    const cipherOptions = {
-      key: formatKey(event._id, clientConfig.ablyEncryptionKey),
-      algorithm: clientConfig.ablyEncryptionAlgorithm,
-      keyLength: clientConfig.ablyEncryptionKeyLength,
-      mode: clientConfig.ablyEncryptionMode,
-    };
-    const eventChannel = rtClient.channels.get(event._id, {
-      cipher: cipherOptions,
-    });
-    eventChannel.subscribe((msg) => {
-      console.log("Rcvd msg", msg);
-      setAblyMessages([...ablyMessages, msg]);
+      return null;
     });
 
     // eslint-disable-next-line consistent-return
     return () => rtClient.close();
-  }, [event]);
+  }, [store.isLoaded]);
 
-  if (event === null) {
+  if (store.event === null) {
     return <p>Loading...</p>;
   }
 
-  if (event === false) {
+  if (store.event === false) {
     return <p>Could not load event</p>;
   }
 
@@ -65,8 +72,11 @@ export default function Event({ eventCode }) {
       <p>{`You are viewing Event ${eventCode}`}</p>
       <p>You are now connected</p>
       <ul>
-        {ablyMessages.map((m, idx) => (
-          <li key={idx}>{JSON.stringify(m)}</li>
+        {store.event.questions.map((q, idx) => (
+          <li key={idx}>
+            {store.event.selectedQuestion === q._id ? "(x)" : ""}
+            {q.title}
+          </li>
         ))}
       </ul>
     </div>
