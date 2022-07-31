@@ -1,4 +1,4 @@
-import { AppStyle, Footer, Header } from "./App.styles";
+import { AppStyle, Footer, Header, Main } from "./App.styles";
 import { useEffect, useState } from "react";
 
 import EventCodeForm from "./Views/EventCodeForm";
@@ -38,13 +38,13 @@ export default function App() {
     <AppStyle>
       <Header>MiniClap</Header>
 
-      <main>
+      <Main>
         {eventCode ? (
           <EventView eventCode={eventCode} />
         ) : (
           <EventCodeForm onSubmit={onSubmit} />
         )}
-      </main>
+      </Main>
 
       <Footer>
         <p>Miniclap is an experiment by Tchap</p>

@@ -12,7 +12,9 @@ export default function EventCodeForm({ onSubmit }) {
         onChange={({ target: { value } }) => setCode(value)}
         value={code}
       />
-      <Button onClick={() => onSubmit(code)}>GO</Button>
+      <div>
+        <Button onClick={() => onSubmit(code)}>GO</Button>
+      </div>
     </>
   );
 }

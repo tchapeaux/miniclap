@@ -1,4 +1,4 @@
-import "./index.css";
+import { GlobalStlye } from "./App.styles";
 
 import App from "./App";
 import React from "react";
@@ -13,6 +13,7 @@ window.__wooclap = {
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <GlobalStlye />
     <App />
   </React.StrictMode>
 );

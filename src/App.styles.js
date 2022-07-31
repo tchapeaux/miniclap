@@ -1,4 +1,18 @@
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
+
+export const GlobalStlye = createGlobalStyle`
+    body {
+        margin: 0;
+        font-family: "Chivo", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+
+        font-size: 20px;
+
+        background-color: antiquewhite;
+        color: CornflowerBlue;
+    }
+`;
 
 export const AppStyle = styled.div`
   display: flex;
@@ -24,6 +38,13 @@ export const Header = styled.header`
   }
 `;
 
+export const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const Footer = styled.footer`
   font-size: 0.7em;
   margin-top: 25px;
@@ -39,7 +60,6 @@ export const Button = styled.button`
   transition: color 0.3s ease;
 
   font-size: 1.3em;
-  text-decoration: underline;
 
   &:hover {
     color: crimson;
