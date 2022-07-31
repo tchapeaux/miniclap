@@ -35,10 +35,7 @@ export default function Event({ eventCode }) {
     );
 
     const cipherOptions = {
-      key: formatKey(
-        event._id,
-        window.__wooclap.clientConfig.ablyEncryptionKey
-      ),
+      key: formatKey(event._id, clientConfig.ablyEncryptionKey),
       algorithm: clientConfig.ablyEncryptionAlgorithm,
       keyLength: clientConfig.ablyEncryptionKeyLength,
       mode: clientConfig.ablyEncryptionMode,
