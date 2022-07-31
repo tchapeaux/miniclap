@@ -1,10 +1,9 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-
-import App from "./App";
-
 import "./index.css";
 import "virtual:fonts.css";
+
+import App from "./App";
+import React from "react";
+import ReactDOM from "react-dom/client";
 
 // Set global values
 window.__wooclap = {

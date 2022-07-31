@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import "./App.css";
 
-import { getConfig } from "./api";
+import { useEffect, useState } from "react";
 
 import EventCodeForm from "./Views/EventCodeForm";
 import EventView from "./Views/EventView";
-
-import "./App.css";
+import { getConfig } from "./api";
 
 export default function App() {
   const [hasClientConfig, setHasClientConfig] = useState(false);
@@ -28,11 +27,11 @@ export default function App() {
     }
   }, []);
 
-  function onSubmit(eventCode) {
-    setEventCode(eventCode);
+  function onSubmit(code) {
+    setEventCode(code);
   }
 
-  if (!wooclapConfig) {
+  if (!hasClientConfig) {
     return <div className="App">Loading...</div>;
   }
 
