@@ -78,6 +78,6 @@ export function formatKey(channelId, encryptionKey) {
     // Note: n = (m bits / 8 bits), to get a byte length
     // Note: o = CEIL(n bytes / 3 bytes), minimum amount of 24 bit chunks
     // Note: p = o * 4, round back to multiple of 4 chars (24 bits)
-    Math.ceil(window.__wooclap.clientConfig.encryptionKeyLength / 8 / 3) * 4
+    Math.ceil(window.__wooclap.clientConfig.ablyEncryptionKeyLength / 8 / 3) * 4
   );
 }
