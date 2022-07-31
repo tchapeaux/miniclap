@@ -3,7 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "parcel"
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "dependencies": {
     "ably": "^1.2.28",
