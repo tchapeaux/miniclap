@@ -4,6 +4,7 @@ import { getEvent, pushAnswer } from "../utils/api";
 import { useEffect, useReducer } from "react";
 
 import SocketController from "../utils/realtime";
+import { QuestionWrapper } from "./EventView.styles";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -125,10 +126,12 @@ export default function EventView({ eventCode }) {
         <code>{eventCode}</code>
       </h2>
 
-      <SelectedQuestionComponent
-        onPushAnswer={onPushAnswer.bind(null, selectedQuestion?._id)}
-        question={selectedQuestion}
-      />
+      <QuestionWrapper>
+        <SelectedQuestionComponent
+          onPushAnswer={onPushAnswer.bind(null, selectedQuestion?._id)}
+          question={selectedQuestion}
+        />
+      </QuestionWrapper>
     </div>
   );
 }
