@@ -47,7 +47,10 @@ export default function App() {
       </Main>
 
       <Footer>
-        <p>Miniclap is an experiment by Tchap</p>
+        <span>Miniclap is an experiment by Tchap</span>
+        <span>
+          <a href="https://github.com/tchapeaux/miniclap/">Source code</a>
+        </span>
       </Footer>
     </AppStyle>
   );

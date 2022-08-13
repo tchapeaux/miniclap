@@ -1,6 +1,14 @@
 import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStlye = createGlobalStyle`
+
+:root {
+  --bg: antiquewhite;
+  --text: CornflowerBlue;
+  --primary: coral;
+}
+
+
     body {
         margin: 0;
         font-family: "Chivo", sans-serif;
@@ -9,8 +17,8 @@ export const GlobalStlye = createGlobalStyle`
 
         font-size: 20px;
 
-        background-color: antiquewhite;
-        color: CornflowerBlue;
+        background-color: var(--bg);
+        color: var(--text);
     }
 `;
 
@@ -47,7 +55,23 @@ export const Main = styled.main`
 
 export const Footer = styled.footer`
   font-size: 0.7em;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin-top: 25px;
+
+  a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+
+    &:hover {
+      color: crimson;
+      text-decoration: underline;
+    }
+  }
 `;
 
 export const Button = styled.button`
@@ -56,7 +80,7 @@ export const Button = styled.button`
   background: none;
   border: none;
 
-  color: coral;
+  color: var(--primary);
   transition: color 0.3s ease;
 
   font-size: 1.3em;
