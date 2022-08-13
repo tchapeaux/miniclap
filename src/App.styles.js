@@ -1,13 +1,12 @@
 import styled, { createGlobalStyle } from "styled-components";
 
-export const GlobalStlye = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
 
 :root {
   --bg: antiquewhite;
   --text: CornflowerBlue;
   --primary: coral;
 }
-
 
     body {
         margin: 0;

@@ -1,5 +1,6 @@
 import App from "./App";
-import { GlobalStlye } from "./App.styles";
+import { CssReset } from "./css-reset.styles";
+import { GlobalStyle } from "./App.styles";
 import React from "react";
 import ReactDOM from "react-dom/client";
 
@@ -12,7 +13,8 @@ window.__wooclap = {
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <GlobalStlye />
+    <CssReset />
+    <GlobalStyle />
     <App />
   </React.StrictMode>
 );
