@@ -1,6 +1,5 @@
-import { GlobalStlye } from "./App.styles";
-
 import App from "./App";
+import { GlobalStlye } from "./App.styles";
 import React from "react";
 import ReactDOM from "react-dom/client";
 
